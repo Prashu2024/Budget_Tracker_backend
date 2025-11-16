@@ -122,8 +122,8 @@ CORS_ALLOWED_ORIGINS = config(
     default='http://localhost:3000,http://localhost:5173,https://budget-tracker-frontend-nu.vercel.app'
 ).split(',')
 
-
-
+CORS_ALLOW_ALL_HEADERS = True
+CORS_ALLOW_ALL_METHODS = True
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
