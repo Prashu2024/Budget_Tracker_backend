@@ -33,10 +33,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -117,14 +117,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ]
 
 # CORS for production
-CORS_ALLOWED_ORIGINS = config(
-    'CORS_ORIGINS',
-    default='http://localhost:3000,http://localhost:5173,https://budget-tracker-frontend-nu.vercel.app'
-).split(',')
+# CORS_ALLOWED_ORIGINS = config(
+#     'CORS_ORIGINS',
+#     default='http://localhost:3000,http://localhost:5173,https://budget-tracker-frontend-nu.vercel.app'
+# ).split(',')
 
-CORS_ALLOW_ALL_HEADERS = True
-CORS_ALLOW_ALL_METHODS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://budget-tracker-frontend-nu.vercel.app",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://budgettrackerbackend-production-53a7.up.railway.app",
+    "https://budget-tracker-frontend-nu.vercel.app",
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_METHODS = True
+CORS_ALLOW_ALL_HEADERS = True
+
 
 CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
